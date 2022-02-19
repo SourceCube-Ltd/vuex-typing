@@ -24,8 +24,7 @@
     "fix:eslint": "yarn lint:eslint --fix",
     "fix:prettier": "prettier '**/*.{ts,json,yml,yaml}' --write",
     "lint-staged": "lint-staged --allow-empty",
-    "prepare": "husky install",
-    "prepublish": "yarn build",
+    "prepare": "npm run build",
     "test": "jest"
   },
   "lint-staged": {

@@ -1,4 +1,5 @@
 import type { IsAny, IsNever } from "./type-utils"
+import type { DispatchOptions } from "vuex"
 
 export type BaseState = Record<string, any>
 export type BaseGetter<State = BaseState> = (
@@ -97,11 +98,12 @@ export type DispatchType<Action extends Record<string, any>> = <
   Type extends keyof Action
 >(
   key: Type,
-  ...args: ExtractPayload<Action[Type]> extends infer I
+  payload?: ExtractPayload<Action[Type]> extends infer I
     ? IsNever<I> extends true
-      ? []
-      : [I]
-    : never
+      ? Record<string, never>
+      : I
+    : never,
+  options?: DispatchOptions
 ) => ReturnTypeAsPromise<Action[Type]>
 
 export type ActionToMethod<Declare extends BaseAction> = (
